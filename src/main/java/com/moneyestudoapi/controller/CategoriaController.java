@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriBuilder;
 
+import com.moneyestudoapi.exceptionhandler.RecursoNaoEncontradoException;
 import com.moneyestudoapi.model.Categoria;
 import com.moneyestudoapi.repository.CategoriaRepository;
 
@@ -42,14 +42,17 @@ public class CategoriaController {
 		Categoria categoriaSalva = categoriaRepository.save(categoria);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-				.buildAndExpand(categoriaSalva.getCodigo()).toUri(); // a partir do retorno da requisição eu vou retornar o codigo da categoria salva no location do header
+				.buildAndExpand(categoriaSalva.getCodigo()).toUri(); // a partir do retorno da requisição eu vou
+																		// retornar o codigo da categoria salva no
+																		// location do header
 		response.setHeader("Location", uri.toASCIIString());
 		return ResponseEntity.created(uri).body(categoriaSalva);
 	}
-	
+
 	@GetMapping("/{codigo}")
-	public Categoria buscarPeloCodigo(@PathVariable Long codigo) {
-		Optional<Categoria> categoriaRetorno = categoriaRepository.findById(codigo);
- 		return categoriaRetorno.get();
+	public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo) {
+		Optional<Categoria> categoria = categoriaRepository.findById(codigo);
+
+		return categoria.isPresent() ? ResponseEntity.ok(categoria.get()) : ResponseEntity.notFound().build();
 	}
 }
