@@ -48,7 +48,9 @@ public class ExceptionHandlerApi extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 	}
 		
-	@ExceptionHandler({ RecursoNaoEncontradoException.class })
+	@ExceptionHandler({ EmptyResultDataAccessException.class })
+	//Esta anotação diz que toda vez que esta excessão entre parenteses acontecer este metodo sera chamado
+	//Posso passar neste mesmo parenteses outras excessões para o mesmo tratamento
 	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
