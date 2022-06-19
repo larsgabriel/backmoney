@@ -28,7 +28,12 @@ public class PessoaController {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-
+	
+	
+	//Esta é classe responsavel por publicar o evento
+	//Ela vai chamar a construção do evento e seus parametros, this é pq referencia essa classe, response é o cara que carrega a resposta
+	// e o codigo que ele precisa publicar, poderia ser qualquer outra coisa em qualquer outro lugar dependendo do meu construtor
+	//mas a estrutura pra se montar um evento a partir de alguma ação do sistema é essa.
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
