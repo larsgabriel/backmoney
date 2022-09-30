@@ -5,6 +5,11 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,12 +20,14 @@ import lombok.Data;
 @Table(name = "lancamento")
 @Data
 public class Lancamento {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
 	private String descricao;
 	
-	@Column(name = "data vencimento")
+	@Column(name = "data_vencimento")
 	private LocalDate dataVencimento;
 	
 	@Column(name = "data_pagamento")
@@ -30,6 +37,7 @@ public class Lancamento {
 	
 	private String observacao;
 	
+	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipo;
 	
 	@ManyToOne //neste caso como aqui ta setado em categoria deve-se ler "uma categoria pode estar em varios lancamentos"
