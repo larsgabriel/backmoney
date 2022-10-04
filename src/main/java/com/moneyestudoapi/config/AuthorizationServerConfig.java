@@ -28,15 +28,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		clients.inMemory()
 			.withClient("angular")
 			.secret(passwordEncoder.encode("@ngul@r0")) // @ngul@r0
-			.scopes("read", "write").authorizedGrantTypes("password").accessTokenValiditySeconds(1800).and()
+			.scopes("read", "write")
+			.authorizedGrantTypes("password", "refresh_token")
+			.accessTokenValiditySeconds(20)
+			.refreshTokenValiditySeconds(3600 * 24)
+			.and()
 			.withClient("mobile").secret(passwordEncoder.encode("m0b1l30")) // m0b1l30
 			.scopes("read").authorizedGrantTypes("password").accessTokenValiditySeconds(1800);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager).accessTokenConverter(accessTokenConverter())
-				.tokenStore(tokenStore());
+		endpoints
+		.authenticationManager(authenticationManager)
+		.accessTokenConverter(accessTokenConverter())
+		.tokenStore(tokenStore())
+		.reuseRefreshTokens(false);
 	}
 
 	@Bean
