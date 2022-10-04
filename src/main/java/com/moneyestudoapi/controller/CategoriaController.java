@@ -32,7 +32,7 @@ public class CategoriaController {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
-	@GetMapping
+	@GetMapping("/listar")
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
 
