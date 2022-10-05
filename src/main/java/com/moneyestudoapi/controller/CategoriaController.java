@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +32,9 @@ public class CategoriaController {
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
-
-	@GetMapping("/listar")
+	
+//	@CrossOrigin (maxAge = 10, origins = "localhost:8000")// É usado para o CORS para que aceite requisições de outras origens porém nesse caso da problema com o token por isso 
+	// foi criada a classe CorsFilter que serve como filtro
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
 

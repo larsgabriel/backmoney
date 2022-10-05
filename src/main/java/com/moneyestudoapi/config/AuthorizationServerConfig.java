@@ -29,6 +29,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		//estes são os dados da aplicação que ira chamar e sua "secret" 
 		clients.inMemory()
 				.withClient("angular")
 				.secret(passwordEncoder.encode("@ngul@r0")) // @ngul@r0
