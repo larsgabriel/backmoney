@@ -3,7 +3,6 @@ package com.moneyestudoapi.repository.lancamento;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import com.moneyestudoapi.model.Lancamento;
-import com.moneyestudoapi.model.Lancamento_;
 import com.moneyestudoapi.repository.filter.LancamentoFilter;
 
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
@@ -79,17 +77,17 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 		if(!StringUtils.isEmpty(filter.getDescricao())) {
 			predicates.add(
 					builder.like(
-							builder.lower(root.get(Lancamento_.DESCRICAO)), "%" + filter.getDescricao() + "%"));
+							builder.lower(root.get("descricao")), "%" + filter.getDescricao() + "%"));
 		}
 		
 		if(filter.getDataVencimentoDe() != null) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Lancamento_.DATA_VENCIMENTO), filter.getDataVencimentoDe() ));
+					builder.greaterThanOrEqualTo(root.get("data_vencimento"), filter.getDataVencimentoDe() ));
 		}
 		
 		if(filter.getDataVencimentoAte() != null) {
 			predicates.add(
-					builder.lessThanOrEqualTo(root.get(Lancamento_.DATA_VENCIMENTO), filter.getDataVencimentoAte() ));
+					builder.lessThanOrEqualTo(root.get("data_vencimento"), filter.getDataVencimentoAte() ));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
