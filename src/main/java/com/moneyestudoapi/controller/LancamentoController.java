@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.moneyestudoapi.event.RecursoCriadoEvent;
 import com.moneyestudoapi.model.Lancamento;
 import com.moneyestudoapi.repository.LancamentoRepository;
 import com.moneyestudoapi.repository.filter.LancamentoFilter;
+import com.moneyestudoapi.repository.projection.ProjectionLancamento;
 import com.moneyestudoapi.service.LancamentoService;
 
 @RestController
@@ -64,6 +66,12 @@ public class LancamentoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		this.lancamentoRepository.deleteById(codigo);
+	}
+	
+	@GetMapping(params = "resumo") //neste caso sera verificado se existe um parametro chamado resumo, se existir ele ja cai nesse endpoint
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and hasAuthority('SCOPE_read')" )
+	public Page<ProjectionLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.resumir(lancamentoFilter, pageable);
 	}
 	
 }
