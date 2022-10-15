@@ -10,7 +10,7 @@ Deploy no Heroku
 - ESTANDO LOGADO CRIE O NOME DA SUA APLICAÇÃO CASO NÃO EXISTA:
 	 exemplo: heroku create backmoney-lars
 - AGORA É NECESSÁRIO ADICIONAR PLUGINS PARA CRIAR UM BANCO SQL PARA A APLICAÇÃO
-	heroku addons: heroku addons:create jawsdb:kitefin
+	heroku addons:create jawsdb:kitefin
 - NA RESPOSTA VIRA ALGO ASSIM:
 	Use heroku addons:info jawsdb-solid-11539 to check creation progress
 - USE O COMANDO DADO PARA VER AS INFORMAÇÕES:

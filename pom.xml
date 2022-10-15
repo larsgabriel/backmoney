@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.algaworks.algamoney-api</groupId>
-	<artifactId>algamoney-api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<name>algamoney-api</name>
+	<artifactId>backmoney-api</artifactId>
+	<version>1.0.0</version>
+	<name>backmoney-api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
